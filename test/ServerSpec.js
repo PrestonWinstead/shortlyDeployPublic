@@ -11,7 +11,7 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
@@ -95,7 +95,8 @@ xdescribe('', function() {
           url: 'http://www.roflzoo.com/',
           title: 'Funny pictures of animals, funny dog pictures',
           baseUrl: 'http://127.0.0.1:4568',
-          visits: 0
+          visits: 0,
+          code: '582d6'
         });
 
         link.save(function() {
@@ -111,6 +112,8 @@ xdescribe('', function() {
             'url': 'http://www.roflzoo.com/'})
           .expect(200)
           .expect(function(res) {
+            console.log(res.body);
+            console.log(res.status);
             var secondCode = res.body.code;
             expect(secondCode).to.equal(firstCode);
           })
@@ -118,6 +121,7 @@ xdescribe('', function() {
       });
 
       it('Shortcode redirects to correct url', function(done) {
+        // console.log(link);
         var sha = link.code;
         request(app)
           .get('/' + sha)

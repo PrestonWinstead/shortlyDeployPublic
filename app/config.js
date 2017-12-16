@@ -2,28 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var path = require('path');
 
-mongoose.connect('mongodb://prestonW:veritas42@ds059207.mlab.com:59207/shortlydeploy')
+mongoose.connect('mongodb://prestonW:veritas42@ds059207.mlab.com:59207/shortlydeploy', {useMongoClient: true});
 
-const urlsSchema = new Schema({
-  id: Number,
-  url: String,
-  baseUrl: String,
-  code: String,
-  title: String,
-  visits: Number,
-  timestamp: {type: Date, default: Date.now}
+const db = mongoose.connection;
+
+db.on('error', () => {
+  console.error('connection error')
 });
 
-const usersSchema = new Schema({
-  id: Number,
-  username: String,
-  password: String,
-  timestamp: { type: Date, default: Date.now }
+db.once('open', () => {
+  console.log('connection open');
 });
 
-const User = mongoose.model('User', usersSchema);
+// db.on('creating', () => {
 
-const Url = mongoose.model('Url', urlsSchema);
+// })
 
 module.exports.saveUser = (userObj) => {
   const newUser = new User(userObj);
@@ -50,7 +43,6 @@ module.exports.saveUrl = (urlObj) => {
     });
   });
 }
-
 
 // var knex = require('knex')({
 //   client: 'sqlite3',
@@ -90,4 +82,4 @@ module.exports.saveUrl = (urlObj) => {
 //   }
 // });
 
-// module.exports = db;
+module.exports = db;

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "grunt build && grunt upload",
-    "test": "grunt test",
+    "test": "mocha --timeout 5000 --bail --reporter nyan test/ServerSpec.js",
     "lint": "eslint ./"
   },
   "dependencies": {
@@ -38,6 +38,7 @@
     "knex": "^0.10.0",
     "mocha": "^2.4.5",
     "mongoose": "^4.4.10",
+    "mongoose-trigger": "^1.0.1",
     "request": "^2.34.0",
     "sqlite3": "~3.1.1"
   },
