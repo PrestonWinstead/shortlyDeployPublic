@@ -36,9 +36,7 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      target: [
-        '**/*.js'
-      ]
+      target: ['app/**/*.js', 'lib/**/*.js', 'public/client/**/*.js', 'server-config.js', 'server.js']
     },
 
     cssmin: {
@@ -119,6 +117,8 @@ module.exports = function(grunt) {
   grunt.registerTask('prodServer', ['shell'])
 
   grunt.registerTask('build', ['test', 'eslint', 'concat', 'uglify', 'cssmin']);
+
+  grunt.registerTask('lint', ['eslint']);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {

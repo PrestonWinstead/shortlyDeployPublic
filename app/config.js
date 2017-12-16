@@ -7,7 +7,7 @@ mongoose.connect('mongodb://prestonW:veritas42@ds059207.mlab.com:59207/shortlyde
 const db = mongoose.connection;
 
 db.on('error', () => {
-  console.error('connection error')
+  console.error('connection error');
 });
 
 db.once('open', () => {
@@ -29,7 +29,7 @@ module.exports.saveUser = (userObj) => {
       }
     });
   });
-}
+};
 
 module.exports.saveUrl = (urlObj) => {
   const newUrl = new Url(urlObj);
@@ -42,7 +42,7 @@ module.exports.saveUrl = (urlObj) => {
       }
     });
   });
-}
+};
 
 // var knex = require('knex')({
 //   client: 'sqlite3',
