@@ -42,6 +42,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      options: {
+        mergeIntoShorthands: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'public/dist/output.css': ['public/style.css']
+        }
+      }
     },
 
     watch: {
@@ -88,7 +97,7 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [ 'concat', 'uglify']);
+  grunt.registerTask('build', [ 'concat', 'uglify', 'cssmin']);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {

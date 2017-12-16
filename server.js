@@ -1,7 +1,7 @@
 var app = require('./server-config.js');
 require('dotenv').config();
 
-var port = process.env.PORT || 1237;
+var port = process.env.PORT || 9000;
 
 app.listen(port);
 
